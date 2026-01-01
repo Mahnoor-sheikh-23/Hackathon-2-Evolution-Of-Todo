@@ -8,5 +8,5 @@ python-multipart==0.0.9
 pydantic==2.5.0
 httpx==0.25.2
 python-dotenv==1.0.0
-better-auth==1.2.0
+better-auth==0.0.1b11
 pyjwt==2.8.0
