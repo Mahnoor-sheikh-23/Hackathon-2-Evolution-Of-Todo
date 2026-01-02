@@ -1,5 +1,5 @@
 // Custom authentication client that works with our backend API
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+const API_BASE_URL = 'https://hackathon-2-evolution-of-todo-production.up.railway.app';
 
 interface User {
   id: string;

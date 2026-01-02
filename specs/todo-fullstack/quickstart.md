@@ -60,7 +60,7 @@
 
 ## API Testing
 
-The backend API endpoints are available at `http://localhost:8000/api/{user_id}/tasks`:
+The backend API endpoints are available at `https://hackathon-2-evolution-of-todo-production.up.railway.app/api/{user_id}/tasks`:
 - GET `/api/{user_id}/tasks` - List all tasks for user
 - POST `/api/{user_id}/tasks` - Create a new task
 - GET `/api/{user_id}/tasks/{id}` - Get specific task

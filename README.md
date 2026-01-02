@@ -68,7 +68,7 @@ Create a `.env` file in the root directory with the following variables:
 DATABASE_URL=your_neon_postgresql_connection_string
 BETTER_AUTH_SECRET=your_jwt_secret_key
 NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+NEXT_PUBLIC_BACKEND_URL=https://hackathon-2-evolution-of-todo-production.up.railway.app
 ```
 
 ### Backend Setup

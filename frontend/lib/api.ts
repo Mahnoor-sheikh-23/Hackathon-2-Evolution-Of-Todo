@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
-// Get the backend URL from environment variables
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+// Use the Railway backend URL for production
+const BACKEND_URL = 'https://hackathon-2-evolution-of-todo-production.up.railway.app';
 
 // Create an Axios instance with default configuration
 const apiClient: AxiosInstance = axios.create({

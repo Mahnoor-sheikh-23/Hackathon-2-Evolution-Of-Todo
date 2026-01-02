@@ -4,8 +4,8 @@ const nextConfig = {
     // appDir: true,
   },
   env: {
-    NEXT_PUBLIC_BETTER_AUTH_URL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
-    NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
+    NEXT_PUBLIC_BETTER_AUTH_URL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL || 'https://hackathon-2-evolution-of-todo-production.up.railway.app',
+    NEXT_PUBLIC_BACKEND_URL: 'https://hackathon-2-evolution-of-todo-production.up.railway.app',
   }
 }
 
