@@ -28,7 +28,7 @@ interface RegisterData {
 export const signIn = {
   email: async ({ email, password, callbackURL }: { email: string; password: string; callbackURL?: string }) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/login/`, {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded', // Using form data format
@@ -65,7 +65,7 @@ export const signIn = {
 export const signUp = {
   email: async ({ email, password, name, callbackURL }: RegisterData & { callbackURL?: string }) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/signup/`, {
+      const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
