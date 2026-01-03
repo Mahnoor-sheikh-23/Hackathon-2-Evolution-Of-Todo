@@ -91,7 +91,7 @@ export const taskApi = {
   // Get a specific task
   getTaskById: async (userId: string, taskId: number): Promise<{ data: Task }> => {
     try {
-      const response = await apiClient.get(`/${userId}/tasks/${taskId}/`);
+      const response = await apiClient.get(`/${userId}/tasks/${taskId}`);
       return { data: response.data };
     } catch (error) {
       console.error('Error fetching task:', error);
@@ -102,7 +102,7 @@ export const taskApi = {
   // Update a task
   updateTask: async (userId: string, taskId: number, taskData: TaskUpdate): Promise<{ data: Task }> => {
     try {
-      const response = await apiClient.put(`/${userId}/tasks/${taskId}/`, taskData);
+      const response = await apiClient.put(`/${userId}/tasks/${taskId}`, taskData);
       return { data: response.data };
     } catch (error) {
       console.error('Error updating task:', error);
@@ -113,7 +113,7 @@ export const taskApi = {
   // Toggle task completion status
   toggleTaskCompletion: async (userId: string, taskId: number): Promise<{ data: Task }> => {
     try {
-      const response = await apiClient.patch(`/${userId}/tasks/${taskId}/complete/`);
+      const response = await apiClient.patch(`/${userId}/tasks/${taskId}/complete`);
       return { data: response.data };
     } catch (error) {
       console.error('Error toggling task completion:', error);
@@ -124,7 +124,7 @@ export const taskApi = {
   // Delete a task
   deleteTask: async (userId: string, taskId: number): Promise<void> => {
     try {
-      await apiClient.delete(`/${userId}/tasks/${taskId}/`);
+      await apiClient.delete(`/${userId}/tasks/${taskId}`);
     } catch (error) {
       console.error('Error deleting task:', error);
       throw error;
@@ -137,7 +137,7 @@ export const userApi = {
   // Get user profile
   getUserProfile: async (userId: string): Promise<any> => {
     try {
-      const response = await apiClient.get(`/users/${userId}/`);
+      const response = await apiClient.get(`/users/${userId}`);
       return response.data;
     } catch (error) {
       console.error('Error fetching user profile:', error);
@@ -148,7 +148,7 @@ export const userApi = {
   // Update user profile
   updateUserProfile: async (userId: string, userData: { name?: string; email?: string }): Promise<any> => {
     try {
-      const response = await apiClient.put(`/users/${userId}/`, userData);
+      const response = await apiClient.put(`/users/${userId}`, userData);
       return response.data;
     } catch (error) {
       console.error('Error updating user profile:', error);
