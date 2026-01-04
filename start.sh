@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
-
 cd backend
 
-exec uvicorn main:app \
-  --host 0.0.0.0 \
-  --port ${PORT}
+# Use the PORT Railway provides
+exec uvicorn main:app --host 0.0.0.0 --port ${PORT}
