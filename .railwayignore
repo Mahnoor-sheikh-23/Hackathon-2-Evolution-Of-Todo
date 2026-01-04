@@ -1,2 +1,3 @@
 docker-compose.yml
 frontend/Dockerfile
+backend/Dockerfile
