@@ -51,7 +51,7 @@ app.add_middleware(
     "http://127.0.0.1:3000",
     "https://hackathon-2-evolution-of-todo-production.up.railway.app"  # optional, if backend calls itself
 ]
-
+,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
