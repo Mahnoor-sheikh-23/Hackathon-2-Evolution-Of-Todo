@@ -1,11 +1,14 @@
 import axios, { AxiosInstance } from 'axios';
 
-// Use the Railway backend URL for production
-const BACKEND_URL = 'https://hackathon-2-evolution-of-todo-production.up.railway.app';
+// Use local backend URL for development, Railway for production
+const BACKEND_URL = typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://127.0.0.1:8000'
+  : 'https://hackathon-2-evolution-of-todo-production.up.railway.app';
 
 // Create an Axios instance with default configuration
 const apiClient: AxiosInstance = axios.create({
-  baseURL: `${BACKEND_URL}/api`,
+  baseURL: BACKEND_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -69,7 +72,7 @@ export const taskApi = {
   // Get all tasks for a user
   getTasks: async (userId: string): Promise<{ data: Task[] }> => {
     try {
-      const response = await apiClient.get(`/${userId}/tasks/`);
+      const response = await apiClient.get(`/api/${userId}/tasks/`);
       return { data: response.data };
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -80,7 +83,7 @@ export const taskApi = {
   // Create a new task
   createTask: async (userId: string, taskData: TaskCreate): Promise<{ data: Task }> => {
     try {
-      const response = await apiClient.post(`/${userId}/tasks/`, taskData);
+      const response = await apiClient.post(`/api/${userId}/tasks/`, taskData);
       return { data: response.data };
     } catch (error) {
       console.error('Error creating task:', error);
@@ -91,7 +94,7 @@ export const taskApi = {
   // Get a specific task
   getTaskById: async (userId: string, taskId: number): Promise<{ data: Task }> => {
     try {
-      const response = await apiClient.get(`/${userId}/tasks/${taskId}`);
+      const response = await apiClient.get(`/api/${userId}/tasks/${taskId}`);
       return { data: response.data };
     } catch (error) {
       console.error('Error fetching task:', error);
@@ -102,7 +105,7 @@ export const taskApi = {
   // Update a task
   updateTask: async (userId: string, taskId: number, taskData: TaskUpdate): Promise<{ data: Task }> => {
     try {
-      const response = await apiClient.put(`/${userId}/tasks/${taskId}`, taskData);
+      const response = await apiClient.put(`/api/${userId}/tasks/${taskId}`, taskData);
       return { data: response.data };
     } catch (error) {
       console.error('Error updating task:', error);
@@ -113,7 +116,7 @@ export const taskApi = {
   // Toggle task completion status
   toggleTaskCompletion: async (userId: string, taskId: number): Promise<{ data: Task }> => {
     try {
-      const response = await apiClient.patch(`/${userId}/tasks/${taskId}/complete`);
+      const response = await apiClient.patch(`/api/${userId}/tasks/${taskId}/complete`);
       return { data: response.data };
     } catch (error) {
       console.error('Error toggling task completion:', error);
@@ -124,7 +127,7 @@ export const taskApi = {
   // Delete a task
   deleteTask: async (userId: string, taskId: number): Promise<void> => {
     try {
-      await apiClient.delete(`/${userId}/tasks/${taskId}`);
+      await apiClient.delete(`/api/${userId}/tasks/${taskId}`);
     } catch (error) {
       console.error('Error deleting task:', error);
       throw error;
@@ -137,7 +140,7 @@ export const userApi = {
   // Get user profile
   getUserProfile: async (userId: string): Promise<any> => {
     try {
-      const response = await apiClient.get(`/users/${userId}`);
+      const response = await apiClient.get(`/api/users/${userId}`);
       return response.data;
     } catch (error) {
       console.error('Error fetching user profile:', error);
@@ -148,7 +151,7 @@ export const userApi = {
   // Update user profile
   updateUserProfile: async (userId: string, userData: { name?: string; email?: string }): Promise<any> => {
     try {
-      const response = await apiClient.put(`/users/${userId}`, userData);
+      const response = await apiClient.put(`/api/users/${userId}`, userData);
       return response.data;
     } catch (error) {
       console.error('Error updating user profile:', error);
@@ -183,6 +186,81 @@ export const authApi = {
     localStorage.removeItem('better-auth-token');
     localStorage.removeItem('user-id');
     return { success: true };
+  },
+};
+
+// Define TypeScript interfaces for Chat API entities
+export interface Conversation {
+  id: number;
+  user_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Message {
+  id: number;
+  conversation_id: number;
+  user_id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  created_at: string;
+}
+
+export interface ChatRequest {
+  message: string;
+  conversation_id?: number;
+}
+
+export interface ChatResponse {
+  response: string;
+  conversation_id: number;
+  message_id: number;
+  tool_calls: any[];
+}
+
+// Chat API service
+export const chatApi = {
+  // Send a message to the AI
+  sendMessage: async (userId: string, data: ChatRequest): Promise<{ data: ChatResponse }> => {
+    try {
+      const response = await apiClient.post(`/api/${userId}/chat`, data);
+      return { data: response.data };
+    } catch (error) {
+      console.error('Error sending message:', error);
+      throw error;
+    }
+  },
+
+  // Get all conversations for a user
+  getConversations: async (userId: string): Promise<{ data: Conversation[] }> => {
+    try {
+      const response = await apiClient.get(`/api/${userId}/conversations`);
+      return { data: response.data };
+    } catch (error) {
+      console.error('Error fetching conversations:', error);
+      throw error;
+    }
+  },
+
+  // Get messages for a specific conversation
+  getConversationMessages: async (userId: string, conversationId: number): Promise<{ data: Message[] }> => {
+    try {
+      const response = await apiClient.get(`/api/${userId}/conversations/${conversationId}/messages`);
+      return { data: response.data };
+    } catch (error) {
+      console.error('Error fetching conversation messages:', error);
+      throw error;
+    }
+  },
+
+  // Delete a conversation
+  deleteConversation: async (userId: string, conversationId: number): Promise<void> => {
+    try {
+      await apiClient.delete(`/api/${userId}/conversations/${conversationId}`);
+    } catch (error) {
+      console.error('Error deleting conversation:', error);
+      throw error;
+    }
   },
 };
 

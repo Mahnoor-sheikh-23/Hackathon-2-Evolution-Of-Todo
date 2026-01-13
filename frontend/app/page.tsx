@@ -28,22 +28,6 @@ export default function HomePage() {
       <div className={`min-h-screen ${theme === 'dark'
         ? 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
         : 'bg-gradient-to-br from-slate-100 via-purple-50 to-slate-100'} relative overflow-hidden flex items-center justify-center`}>
-        <style jsx>{`
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          .animate-fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
-            opacity: 0;
-          }
-        `}</style>
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className={`absolute -top-40 -right-40 w-80 h-80 ${theme === 'dark' ? 'bg-purple-500/10' : 'bg-purple-500/5'} rounded-full blur-3xl animate-pulse`}></div>
@@ -72,31 +56,6 @@ export default function HomePage() {
     <div className={`min-h-screen ${theme === 'dark'
       ? 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
       : 'bg-gradient-to-br from-slate-100 via-purple-50 to-slate-100'} relative overflow-hidden`}>
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in-up {
-          animation: fadeInUp 0.6s ease-out forwards;
-          opacity: 0;
-        }
-        .delay-200 {
-          animation-delay: 200ms;
-        }
-        .delay-400 {
-          animation-delay: 400ms;
-        }
-        .delay-600 {
-          animation-delay: 600ms;
-        }
-      `}</style>
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className={`absolute -top-40 -right-40 w-80 h-80 ${theme === 'dark' ? 'bg-purple-500/10' : 'bg-purple-500/5'} rounded-full blur-3xl animate-pulse`}></div>
@@ -152,6 +111,10 @@ export default function HomePage() {
               </Link>
               {isAuthenticated ? (
                 <>
+                  <Link href="/chat" className={`${theme === 'dark' ? 'text-white/80 hover:text-white' : 'text-slate-800/80 hover:text-slate-900'} transition-colors relative group`}>
+                    AI Chat
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
                   <Link href="/dashboard" className={`${theme === 'dark' ? 'text-white/80 hover:text-white' : 'text-slate-800/80 hover:text-slate-900'} transition-colors relative group`}>
                     Dashboard
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
@@ -252,6 +215,15 @@ export default function HomePage() {
                 </Link>
                 {isAuthenticated ? (
                   <>
+                    <Link
+                      href="/chat"
+                      className={`block px-3 py-2 rounded-md text-base font-medium ${
+                        theme === 'dark' ? 'text-white hover:bg-slate-700/50' : 'text-slate-800 hover:bg-slate-100'
+                      }`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      AI Chat
+                    </Link>
                     <Link
                       href="/dashboard"
                       className={`block px-3 py-2 rounded-md text-base font-medium ${

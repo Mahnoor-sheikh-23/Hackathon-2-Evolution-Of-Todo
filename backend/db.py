@@ -2,6 +2,7 @@ from sqlmodel import create_engine
 import os
 from urllib.parse import urlparse
 from models.user import User  # Import User model to ensure it's included in metadata
+from chatbot.models import Conversation, Message  # Import chatbot models to ensure they're included in metadata
 
 # Get database URL from environment variable
 DATABASE_URL = os.getenv("DATABASE_URL")

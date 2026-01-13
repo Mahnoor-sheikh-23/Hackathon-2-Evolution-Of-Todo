@@ -52,6 +52,22 @@ export default function TasksPage() {
     }
   }, [userId]);
 
+  // Listen for tasksChanged event to refresh task list when chatbot modifies tasks
+  useEffect(() => {
+    const handleTasksChanged = () => {
+      if (userId) {
+        fetchTasks();
+      }
+    };
+
+    window.addEventListener('tasksChanged', handleTasksChanged);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('tasksChanged', handleTasksChanged);
+    };
+  }, [userId]);
+
   // Filter tasks based on search term and status
   const filteredTasks = tasks.filter(task => {
     const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -197,22 +213,6 @@ export default function TasksPage() {
           ? 'bg-gradient-to-br from-white via-purple-50 to-white text-gray-900'
           : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white'
       } relative overflow-hidden`}>
-        <style jsx>{`
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          .animate-fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
-            opacity: 0;
-          }
-        `}</style>
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className={`absolute -top-40 -right-40 w-80 h-80 ${
@@ -296,22 +296,6 @@ export default function TasksPage() {
         ? 'bg-gradient-to-br from-white via-purple-50 to-white text-gray-900'
         : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white'
     } relative overflow-hidden`}>
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in-up {
-          animation: fadeInUp 0.6s ease-out forwards;
-          opacity: 0;
-        }
-      `}</style>
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -372,6 +356,17 @@ export default function TasksPage() {
                 } transition-colors relative group`}
               >
                 Support
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 ${
+                  theme === 'light' ? 'bg-gradient-to-r from-indigo-500 to-purple-500' : 'bg-gradient-to-r from-indigo-500 to-purple-500'
+                } transition-all duration-300 group-hover:w-full`}></span>
+              </button>
+              <button
+                onClick={() => router.push('/chat')}
+                className={`${
+                  theme === 'light' ? 'text-gray-700 hover:text-gray-900' : 'text-white/80 hover:text-white'
+                } transition-colors relative group`}
+              >
+                AI Chat
                 <span className={`absolute -bottom-1 left-0 w-0 h-0.5 ${
                   theme === 'light' ? 'bg-gradient-to-r from-indigo-500 to-purple-500' : 'bg-gradient-to-r from-indigo-500 to-purple-500'
                 } transition-all duration-300 group-hover:w-full`}></span>
@@ -510,6 +505,17 @@ export default function TasksPage() {
                   }`}
                 >
                   Support
+                </button>
+                <button
+                  onClick={() => {
+                    router.push('/chat');
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left ${
+                    theme === 'light' ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-slate-700'
+                  }`}
+                >
+                  AI Chat
                 </button>
                 <button
                   onClick={() => {

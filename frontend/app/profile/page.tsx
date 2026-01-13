@@ -293,6 +293,17 @@ export default function ProfilePage() {
                 } transition-all duration-300 group-hover:w-full`}></span>
               </button>
               <button
+                onClick={() => router.push('/chat')}
+                className={`${
+                  theme === 'light' ? 'text-gray-700 hover:text-gray-900' : 'text-white/80 hover:text-white'
+                } transition-colors relative group`}
+              >
+                AI Chat
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 ${
+                  theme === 'light' ? 'bg-gradient-to-r from-indigo-500 to-purple-500' : 'bg-gradient-to-r from-indigo-500 to-purple-500'
+                } transition-all duration-300 group-hover:w-full`}></span>
+              </button>
+              <button
                 onClick={() => router.push('/tasks')}
                 className={`${
                   theme === 'light' ? 'text-gray-700 hover:text-gray-900' : 'text-white/80 hover:text-white'
@@ -436,6 +447,19 @@ export default function ProfilePage() {
                   }`}
                 >
                   Dashboard
+                </button>
+                <button
+                  onClick={() => {
+                    router.push('/chat');
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left ${
+                    theme === 'light'
+                      ? 'text-gray-700 hover:bg-gray-100'
+                      : 'text-white hover:bg-slate-700'
+                  }`}
+                >
+                  AI Chat
                 </button>
                 <button
                   onClick={() => {
