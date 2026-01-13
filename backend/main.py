@@ -45,7 +45,13 @@ else:
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allowed_origins = [
+    "https://evolution-of-todo-app.netlify.app",  # Your frontend
+    "http://localhost:3000",                       # Local dev
+    "http://127.0.0.1:3000",
+    "https://hackathon-2-evolution-of-todo-production.up.railway.app"  # optional, if backend calls itself
+]
+
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
