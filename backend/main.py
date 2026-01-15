@@ -32,8 +32,9 @@ railway_url = os.getenv("RAILWAY_PUBLIC_DOMAIN", "")
 if environment == "production" or railway_url:
     # Production environment - specify origins
     allowed_origins = [
+         "https://evolution-of-todo-app.netlify.app",
         "https://hackathon-2-evolution-of-todo-production.up.railway.app",  # Railway domain
-        "https://*.railway.app",  # Wildcard for railway subdomains
+          # Wildcard for railway subdomains
     ]
     # Add custom domain if available
     custom_domain = os.getenv("CUSTOM_DOMAIN")
@@ -50,7 +51,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
     # Only expose the authorization header for client access
-    expose_headers=["Access-Control-Allow-Origin"]
 )
 
 # Include the auth, user, and task routes with a base path
