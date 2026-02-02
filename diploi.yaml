@@ -1,26 +1,11 @@
 diploiVersion: v1.0
 
 components:
-  # Monorepo backend + frontend using Docker Compose
   - name: Monorepo Stack
     identifier: docker
     docker_compose: true
-    # Remove folder/package — Docker Compose will handle it
-    env:
-      include:
-        - DATABASE_URL
-        - BETTER_AUTH_SECRET
-        - OPENAI_API_KEY
-        - NEXT_PUBLIC_BACKEND_URL
-        - NEXT_PUBLIC_BETTER_AUTH_URL
 
 addons:
-  # PostgreSQL database
   - name: PostgreSQL
     identifier: postgres
     package: https://github.com/diploi/addon-postgres#main
-    env:
-      include:
-        - POSTGRES_DB
-        - POSTGRES_USER
-        - POSTGRES_PASSWORD
