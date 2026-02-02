@@ -5,8 +5,7 @@ services:
     type: web
     runtime: python
 
-    source:
-      path: backend
+    workdir: backend
 
     build:
       command: pip install -r requirements.txt
