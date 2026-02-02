@@ -1,0 +1,9 @@
+name: evolution-todo-backend
+
+services:
+  - name: api
+    type: web
+    runtime: docker
+    docker_compose: true
+    build:
+      service: backend
