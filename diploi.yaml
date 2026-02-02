@@ -1,24 +1,16 @@
 diploiVersion: v1.0
 
 components:
-  # Backend: FastAPI using Docker
-  - name: FastAPI Backend
-    identifier: python
-    folder: /backend
-    package: https://github.com/diploi/component-python#main
+  # Monorepo backend + frontend using Docker Compose
+  - name: Monorepo Stack
+    identifier: docker
+    docker_compose: true
+    # Remove folder/package — Docker Compose will handle it
     env:
       include:
         - DATABASE_URL
         - BETTER_AUTH_SECRET
         - OPENAI_API_KEY
-
-  # Frontend: Next.js
-  - name: Next.js Frontend
-    identifier: next
-    folder: /frontend
-    package: https://github.com/diploi/component-nextjs#main
-    env:
-      include:
         - NEXT_PUBLIC_BACKEND_URL
         - NEXT_PUBLIC_BETTER_AUTH_URL
 
