@@ -1,0 +1,14 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+sqlmodel==0.0.16
+psycopg[binary]
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.9
+pydantic==2.11.10        # ✅ Downgraded from 2.5.0 to 2.4.4 to avoid Rust build
+httpx==0.25.2
+python-dotenv==1.0.0
+better-auth==0.0.1b11
+pyjwt==2.8.0
+pytz
+
