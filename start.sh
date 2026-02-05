@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
+
+# go to backend
 cd backend
 
-# Use the PORT Railway provides
-exec uvicorn main:app --host 0.0.0.0 --port ${PORT}
+# use Replit's PORT, default to 8000
+PORT=${PORT:-8000}
+
+# run uvicorn and keep it running
+exec uvicorn main:app --host 0.0.0.0 --port $PORT
