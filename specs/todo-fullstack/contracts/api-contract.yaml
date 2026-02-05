@@ -4,7 +4,7 @@ info:
   description: REST API for Todo Full-Stack Web Application - Phase II
   version: 1.0.0
 servers:
-  - url: https://hackathon-2-evolution-of-todo-production.up.railway.app/api
+  - url: https://hackathon-2-evolution-of-todo--mahnooradnan479.replit.app/api
     description: Production server
   - url: http://localhost:8000/api
     description: Development server

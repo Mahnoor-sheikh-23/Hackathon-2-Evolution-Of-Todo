@@ -32,8 +32,9 @@ railway_url = os.getenv("RAILWAY_PUBLIC_DOMAIN", "")
 if environment == "production" or railway_url:
     # Production environment - specify origins
     allowed_origins = [
+        "http://localhost:3000",
          "https://evolution-of-todo-app.netlify.app",
-        "https://hackathon-2-evolution-of-todo-production.up.railway.app",  # Railway domain
+        "https://hackathon-2-evolution-of-todo--mahnooradnan479.replit.app",  # Replit domain
           # Wildcard for railway subdomains
     ]
     # Add custom domain if available

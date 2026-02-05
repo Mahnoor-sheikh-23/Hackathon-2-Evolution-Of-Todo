@@ -6,7 +6,7 @@ info:
 servers:
   - url: http://localhost:8000
     description: Local development server
-  - url: https://production-url.up.railway.app
+  - url: https://hackathon-2-evolution-of-todo--mahnooradnan479.replit.app
     description: Production server
 
 paths:

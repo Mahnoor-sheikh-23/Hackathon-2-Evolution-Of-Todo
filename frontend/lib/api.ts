@@ -1,10 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
 
-// Use local backend URL for development, Railway for production
-const BACKEND_URL = typeof window !== 'undefined' &&
-  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://127.0.0.1:8000'
-  : 'https://hackathon-2-evolution-of-todo-production.up.railway.app';
+// Use environment variable for backend URL, default to Replit, with fallback to localhost
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL ||
+  'https://hackathon-2-evolution-of-todo--mahnooradnan479.replit.app';
 
 // Create an Axios instance with default configuration
 const apiClient: AxiosInstance = axios.create({

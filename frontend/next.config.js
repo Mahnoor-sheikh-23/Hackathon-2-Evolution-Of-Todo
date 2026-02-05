@@ -4,8 +4,8 @@ const nextConfig = {
     // appDir is enabled by default in Next.js 16+
   },
   env: {
-    NEXT_PUBLIC_BETTER_AUTH_URL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL || 'https://hackathon-2-evolution-of-todo-production.up.railway.app',
-    NEXT_PUBLIC_BACKEND_URL: 'https://hackathon-2-evolution-of-todo-production.up.railway.app',
+    NEXT_PUBLIC_BETTER_AUTH_URL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL || 'https://hackathon-2-evolution-of-todo--mahnooradnan479.replit.app/',
+    NEXT_PUBLIC_BACKEND_URL: 'https://hackathon-2-evolution-of-todo--mahnooradnan479.replit.app',
   },
   // Performance optimizations
   compiler: {

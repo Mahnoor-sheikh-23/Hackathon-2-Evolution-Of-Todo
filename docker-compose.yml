@@ -25,7 +25,7 @@ services:
       - "3000:3000"
     environment:
       - NEXT_PUBLIC_BETTER_AUTH_URL=${NEXT_PUBLIC_BETTER_AUTH_URL:-http://localhost:3000}
-      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL:-https://hackathon-2-evolution-of-todo-production.up.railway.app}
+      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL:-https://hackathon-2-evolution-of-todo--mahnooradnan479.replit.app}
     volumes:
       - ./frontend:/app
       - /app/node_modules
