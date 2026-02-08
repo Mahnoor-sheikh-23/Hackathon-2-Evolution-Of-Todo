@@ -1,0 +1,24 @@
+{{- if or .Values.frontend.config .Values.backend.config .Values.database.config }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "todo-app.fullname" . }}-config
+  labels:
+    {{- include "todo-app.labels" . | nindent 4 }}
+data:
+  {{- if .Values.frontend.config }}
+  {{- range $key, $value := .Values.frontend.config }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
+  {{- if .Values.backend.config }}
+  {{- range $key, $value := .Values.backend.config }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
+  {{- if .Values.database.config }}
+  {{- range $key, $value := .Values.database.config }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}
+  {{- end }}
+{{- end }}

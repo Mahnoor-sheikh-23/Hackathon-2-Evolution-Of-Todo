@@ -1,0 +1,56 @@
+# Sample values file for local development
+# Save as local-values.yaml
+
+# Frontend configuration for local development
+frontend:
+  image:
+    repository: todo-frontend
+    tag: "latest"
+    pullPolicy: "Never"  # Use local images
+  service:
+    type: NodePort  # Use NodePort for easier local access
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "256Mi"
+      cpu: "200m"
+
+# Backend configuration for local development
+backend:
+  image:
+    repository: todo-backend
+    tag: "latest"
+    pullPolicy: "Never"  # Use local images
+  service:
+    type: NodePort  # Use NodePort for easier local access
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "300m"
+
+# Database configuration for local development
+database:
+  persistence:
+    enabled: false  # Disable persistence for local development to speed up deployment
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "50m"
+    limits:
+      memory: "128Mi"
+      cpu: "100m"
+
+# Enable ingress for local development if needed
+ingress:
+  enabled: false
+  # className: nginx
+  # hosts:
+  #   - host: todo.local
+  #     paths:
+  #       - path: /
+  #         pathType: Prefix

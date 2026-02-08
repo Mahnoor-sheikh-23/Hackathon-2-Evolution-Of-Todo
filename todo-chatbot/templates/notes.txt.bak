@@ -1,0 +1,17 @@
+{{- if .Values.ingress.enabled }}
+  {{- range $host := .Values.ingress.hosts }}
+    {{- range .paths }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}
+    {{- end }}
+  {{- end }}
+{{- else }}
+Todo Application deployed successfully!
+
+Frontend service: {{ include "todo-app.frontend.fullname" . }}:{{ .Values.frontend.service.port }}
+Backend service: {{ include "todo-app.backend.fullname" . }}:{{ .Values.backend.service.port }}
+Database service: {{ include "todo-app.database.fullname" . }}:{{ .Values.database.service.port }}
+
+To access the services locally:
+  kubectl port-forward svc/{{ include "todo-app.frontend.fullname" . }} 3000:{{ .Values.frontend.service.port }}
+  kubectl port-forward svc/{{ include "todo-app.backend.fullname" . }} 8000:{{ .Values.backend.service.port }}
+{{- end }}

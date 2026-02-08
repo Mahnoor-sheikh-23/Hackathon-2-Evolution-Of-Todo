@@ -1,0 +1,48 @@
+# Multi-stage build for the frontend
+# Stage 1: Build the Next.js application
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json ./
+
+# Install all dependencies (including dev dependencies for the build)
+RUN npm ci
+
+# Copy application code
+COPY . .
+
+# Build the application for production
+RUN npm run build
+
+# Stage 2: Create the production image
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+# Install only production dependencies
+COPY package.json package-lock.json ./
+RUN npm ci --only=production && npm cache clean --force
+
+# Copy the built application from the builder stage
+COPY --from=builder /app/.next ./.next
+
+# Copy public directory from builder stage if it exists (create if doesn't exist)
+RUN mkdir -p ./public
+COPY --from=builder /app/public ./public
+
+# Create a non-root user for security
+RUN addgroup -g 1001 nodejs &&\
+    adduser -S nextjs -u 1001 -G nodejs
+USER nextjs
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD wget --quiet --tries=1 --spider http://localhost:3000 || exit 1
+
+# Start the application
+CMD ["npm", "start"]
